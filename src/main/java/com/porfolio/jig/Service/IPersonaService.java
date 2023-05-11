@@ -6,17 +6,19 @@ package com.porfolio.jig.Service;
 
 import com.porfolio.jig.Model.Persona;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author juang
  */
-public interface IPersonaService {
+
+public interface IPersonaService { 
     
     public List<Persona> verPersonas();
     public void crearPersona(Persona per);
     public void borrarPersona(Long id);
-    public void buscarPersona(Long id);
+    public Persona buscarPersona(Long id);
 
     
     

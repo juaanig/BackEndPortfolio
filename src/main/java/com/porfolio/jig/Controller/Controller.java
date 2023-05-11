@@ -5,8 +5,10 @@
 package com.porfolio.jig.Controller;
 
 import com.porfolio.jig.Model.Persona;
-import java.util.ArrayList;
+import com.porfolio.jig.Service.IPersonaService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,35 +22,25 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class PersonaController {
+public class Controller {
     
-    List<Persona> listaPersonas = new ArrayList();
-    
-    //GET PARA RETORNAR VALORES A CLIENTE SECUENCIA: BBDD > API > CLIENTE
-    @GetMapping("/hola/{name}")
-    public String dataPersona(@PathVariable String name){
-        return "Hola "+ name;
-    }
-
-    //POST PARA AGREGAR VALORES A BBDD SECUENCIA: CLIENTE > API > BBDD
-    @PostMapping("/persona")
-    public void createPersona(@RequestBody String persona){
-        System.out.println("persona: "+ persona);
-    }
+     @Autowired
+     private IPersonaService persoServ;
     
     @PostMapping("/new/persona")
     public void agregarPersona(@RequestBody Persona pers){
-        listaPersonas.add(pers);
+        persoServ.crearPersona(pers);
     }
     
     @GetMapping("/ver/personas")
     @ResponseBody
     public List<Persona> verPerosnas(){
-        return listaPersonas;
+        return persoServ.verPersonas();
     }
     
-    
-    
-    
+    @DeleteMapping("/delete/{id}")
+    public void borrarPersona (@PathVariable Long id){
+        persoServ.borrarPersona(id);
+    }
     
 }
