@@ -1,11 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.porfolio.jig.Controller;
 
-import com.porfolio.jig.Model.Persona;
-import com.porfolio.jig.Service.IPersonaService;
+import com.porfolio.jig.Model.Experience;
+import com.porfolio.jig.Model.Skills;
+import com.porfolio.jig.Model.Studie;
+import com.porfolio.jig.Service.IExperienceService;
+import com.porfolio.jig.Service.ISkillService;
+import com.porfolio.jig.Service.IStudieService;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,23 +25,66 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
     
-     @Autowired
-     private IPersonaService persoServ;
+    //===================================================
+    @Autowired
+    private IExperienceService expServ;
     
-    @PostMapping("/new/persona")
-    public void agregarPersona(@RequestBody Persona pers){
-        persoServ.crearPersona(pers);
+    @PostMapping("/new/exp")
+    public void addExperience(@RequestBody Experience exp){
+        expServ.createExperience(exp);
     }
     
-    @GetMapping("/ver/personas")
+    @GetMapping("/list/experience")
     @ResponseBody
-    public List<Persona> verPerosnas(){
-        return persoServ.verPersonas();
+    public List<Experience> listExperiences(){
+        return expServ.listExperiences();
     }
     
     @DeleteMapping("/delete/{id}")
-    public void borrarPersona (@PathVariable Long id){
-        persoServ.borrarPersona(id);
+    public void deleteExperience (@PathVariable Long id){
+        expServ.deleteExperience(id);
+    }
+    //===================================================
+    
+    //===================================================
+    @Autowired
+    private ISkillService sklServ;
+    
+    @PostMapping("/new/skl")
+    public void addSkill(@RequestBody Skills skl){
+        sklServ.createSkill(skl);
     }
     
+    @GetMapping("/list/skills")
+    @ResponseBody
+    public List<Skills> listSkills(){
+        return sklServ.listSkills();
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public void deleteSkill (@PathVariable Long id){
+        sklServ.deleteSkill(id);
+    }
+    //===================================================
+    
+    //===================================================
+    @Autowired
+    private IStudieService stdServ;
+    
+    @PostMapping("/new/std")
+    public void addStudie(@RequestBody Studie std){
+        stdServ.createStudie(std);
+    }
+    
+    @GetMapping("/list/studies")
+    @ResponseBody
+    public List<Studie> listStudies(){
+        return stdServ.listStudie();
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public void deleteStudie (@PathVariable Long id){
+        stdServ.deleteStudie(id);
+    }
+    //===================================================
 }

@@ -17,26 +17,20 @@ import lombok.Setter;
  */
 @Getter @Setter
 @Entity
-public class Persona {
+public class Experience {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String nombre;
-    private String apellido;
-    private String email;
-    private String telefono;
+    private String title;
+    private String description;
     
-    public Persona(){}
+    public Experience(){}
 
-    public Persona(Long id, String nombre, String apellido, String email, String telefono) {
+    public Experience(Long id, String title, String description) {
         this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.telefono = telefono;
+        this.title = title;
+        this.description = description;
     }
-    
-    
 }
